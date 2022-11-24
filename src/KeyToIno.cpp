@@ -1,8 +1,8 @@
 /**
  * @file KeyToIno.cpp
- * @author your name (you@domain.com)
- * @brief
- * @version 0.1
+ * @author Wesley José Santos (binary_quantum@outlook.com)
+ * @brief Main cpp file
+ * @version 1.0
  * @date 2022-11-22
  *
  * @copyright Copyright (c) 2022
@@ -27,7 +27,7 @@ KeyToIno::KeyToIno(Stream &serial)
     this->stream = &serial;
 }
 
-void KeyToIno::readKeys()
+int KeyToIno::readKeys()
 {
     uint8_t buffer[BUFFER_SIZE];
     uint8_t byteIndex;
@@ -43,14 +43,12 @@ void KeyToIno::readKeys()
         buffer[BUFFER_KEY_STATUS]
             ? bitSet(this->keys[byteIndex], bitIndex)
             : bitClear(this->keys[byteIndex], bitIndex);
-    }
-}
 
-void KeyToIno::getKeys(uint8_t *buffer)
-{
-    for (size_t i = 0; i < 32; i++)
+        return KEY_TO_INO_OK;
+    }
+    else
     {
-        buffer[i] = this->keys[i];
+        return KEY_TO_INO_NO_DATA;
     }
 }
 

@@ -1,8 +1,8 @@
 /**
  * @file KeyToIno.h
- * @author your name (you@domain.com)
- * @brief 
- * @version 0.1
+ * @author Wesley José Santos (binary_quantum@outlook.com)
+ * @brief Main header file
+ * @version 1.0
  * @date 2022-11-22
  * 
  * @copyright Copyright (c) 2022
@@ -15,6 +15,10 @@
 #include <Stream.h>
 #include <inttypes.h>
 
+/**
+ * @brief Keys enumeration
+ * 
+ */
 enum Keys
 {
     KEY_NONE = 0x0,
@@ -208,15 +212,48 @@ enum Keys
     KEY_OEM_CLEAR = 0xFE,
 };
 
+/**
+ * @brief KeyToIno error codes
+ * 
+ */
+enum KeyToInoError
+{
+    KEY_TO_INO_OK,       //!< No error
+    KEY_TO_INO_NO_DATA   //!< No data received
+};
+
+/**
+ * @brief KeyToIno main class
+ * 
+ */
 class KeyToIno
 {
 private:
     uint8_t keys[32];
     Stream *stream;
 public:
+
+    /**
+     * @brief Construct a new Key To Ino object
+     * 
+     * @param serial Serial port to be used for communication
+     */
     KeyToIno(Stream &serial);
-    void readKeys();
-    void getKeys(uint8_t *buffer);
+
+    /**
+     * @brief Read keyboard keys from KeyToInoApp
+     * 
+     * @return KeyToInoError
+     */
+    int readKeys();
+
+    /**
+     * @brief Check if a key is pressed
+     * 
+     * @param key Key to be checked
+     * @return true if key is pressed
+     * @return false if key is not pressed
+     */
     bool isPressed(Keys key);
 };
 
