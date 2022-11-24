@@ -27,7 +27,7 @@ KeyToIno::KeyToIno(Stream &serial)
     this->stream = &serial;
 }
 
-int KeyToIno::readKeys()
+void KeyToIno::readKeys()
 {
     uint8_t buffer[BUFFER_SIZE];
     uint8_t byteIndex;
@@ -44,11 +44,6 @@ int KeyToIno::readKeys()
             ? bitSet(this->keys[byteIndex], bitIndex)
             : bitClear(this->keys[byteIndex], bitIndex);
 
-        return KEY_TO_INO_OK;
-    }
-    else
-    {
-        return KEY_TO_INO_NO_DATA;
     }
 }
 
