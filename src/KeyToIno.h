@@ -213,16 +213,6 @@ enum Keys
 };
 
 /**
- * @brief KeyToIno error codes
- * 
- */
-enum KeyToInoError
-{
-    KEY_TO_INO_OK,       //!< No error
-    KEY_TO_INO_NO_DATA   //!< No data received
-};
-
-/**
  * @brief KeyToIno main class
  * 
  */
@@ -245,7 +235,7 @@ public:
      * 
      * @return KeyToInoError
      */
-    int readKeys();
+    void readKeys();
 
     /**
      * @brief Check if a key is pressed
